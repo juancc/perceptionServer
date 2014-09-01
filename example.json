@@ -1,0 +1,79 @@
+{
+    "segmentation": {
+        "gender": "masculino",
+        "socialEstrata": "5",
+        "email": "test@gmail.com",
+        "projectName": "default",
+        "profession": "estudiante",
+        "age": "27"
+    },
+    "lighting": [
+        -723984,
+        -197895,
+        -197897
+    ],
+    "colors": {
+        "0": 14709,
+        "-16777216": 73,
+        "-15726336": 1,
+        "-16711680": 4,
+        "-15267582": 1,
+        "-15333118": 1,
+        "-15399168": 1,
+        "-15399424": 1,
+        "-15596032": 1,
+        "-15792128": 1
+    },
+    "conceptsEvaluation": {
+        "1.obj": [
+            5,
+            3,
+            4,
+            2,
+            3
+        ],
+        "2.obj": [
+            5,
+            2,
+            4,
+            1,
+            1
+        ],
+        "3.obj": [
+            3,
+            4,
+            3,
+            4,
+            2
+        ],
+        "4.obj": [
+            5,
+            2,
+            4,
+            3,
+            4
+        ]
+    },
+    "adjectives": [
+        [
+            "bonito",
+            " feo"
+        ],
+        [
+            "bueno",
+            " malo"
+        ],
+        [
+            "corto",
+            " largo"
+        ],
+        [
+            "ruidoso",
+            " silencioso"
+        ],
+        [
+            "limpio",
+            " sucio"
+        ]
+    ]
+}

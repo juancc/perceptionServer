@@ -27,7 +27,7 @@ function calcMode(list){
 };
 
 
-
+//funcion que calcula el promedio de una lista de percepciones
 function calcProm(list){
     var promList = [];
     for(var i=0; i<list[0].length; i++){
@@ -55,5 +55,12 @@ function calcProm(list){
 
 
 
+
+
+
+
+
+
 //funciones a exportar
 exports.calcMode = calcMode;
+exports.calcProm = calcProm;

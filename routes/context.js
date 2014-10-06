@@ -44,6 +44,21 @@ function projectLights(allLights){
 }
 
 
+function isLight(light, match){
+    var threshold = 55;
+    
+    match = match.split(',');
+    for(var i=0; i<light.length; i++){
+        light = [parseInt(light[0]), parseInt(light[1]), parseInt(light[2])];
+        match = [parseInt(match[0]), parseInt(match[1]), parseInt(match[2])];
+    }
+
+    return (colorDistance(light, match) < threshold)? true : false;
+
+};
+
+
+
 //projectLights([ [100, 40, 80], [10,50, 200], [200, 200, 200], [210, 200, 210]]);
 
 
@@ -191,3 +206,7 @@ function colorDistance(colorA, colorB){
 };
 
 
+//funciones a exportar
+exports.lightProm = lightProm;
+exports.projectLights = projectLights;
+exports.isLight = isLight;

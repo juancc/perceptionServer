@@ -1,7 +1,8 @@
 // Funciones que manejan los request-response del servidor
 var mongo = require('mongodb'),
     fs = require('fs'),
-    aux = require('./aux');
+    aux = require('./aux'),
+    ctx = require('./context');
 var exec = require("child_process").exec
 
 
@@ -27,12 +28,35 @@ db.open(function(err, db){//crea coleciones dependiendo de los archivos en /medi
            projects.pop();
            for (var i=0 ; i<projects.length; i++){
                 db.createCollection(projects[i], function(err, collection){});    
-                }
-                        
+            }
+             
+         db.collection("default", function(err, collection){
+             var projecLighting = [];//calcula las luces del projecto
+             collection.find().toArray(function(err, items){
+                 for(var i=0; i<items.length; i++){
+                     projecLighting.push( ctx.lightProm(items[i].users.lighting) );
+                     
+                 }
+                 projecLighting = ctx.projectLights(projecLighting);
+                 //console.log(projecLighting);
+             });
+             
+             
+             
+             
+         });
            
            
     });
-}); 
+});
+
+
+
+function getProjectLight(){
+    
+};
+
+
 
 
 function findAllProject(req, res){
@@ -82,8 +106,11 @@ function findByGenero(req, res){
     var concept = req.params.concept;
     var estrato = req.params.estrato;
     var edad = req.params.edad;
+    var profesion = req.params.profesion;
+    var light = req.params.light;
     
-    
+    ;
+
     if(estrato != "none"){
         request["users.estrato"] =  estrato.toString();
     }
@@ -92,6 +119,8 @@ function findByGenero(req, res){
     }
     if(edad != "none"){
         request['users.edad'] = edad.toString();
+    }if(profesion != "none"){
+        request['users.profesion'] = profesion;
     }
 	
     console.log(request);
@@ -101,15 +130,24 @@ function findByGenero(req, res){
         collection.find(request).toArray(function(err, items){
             var resp = [];
             var finalResp = [];
+            var userLights = [];
             if(items.length>0){
 
                 for(var i=0; i<items.length; i++){
-
-                    resp.push(items[i].users.conceptsEvaluation[concept]);
+                    
+                    if(light == "none"){
+                        resp.push(items[i].users.conceptsEvaluation[concept]);
+                    }else{
+                        if( ctx.isLight(ctx.lightProm(items[i].users.lighting), light) ){
+                            resp.push(items[i].users.conceptsEvaluation[concept]);
+                        }
+                        
+                    }
                 }
-
-                finalResp[0] = aux.calcMode(resp);
-                finalResp[1] = aux.calcProm(resp);
+                if(resp.length>0){
+                    finalResp[0] = aux.calcMode(resp);
+                    finalResp[1] = aux.calcProm(resp);
+                }
             }
             
             res.send(finalResp);

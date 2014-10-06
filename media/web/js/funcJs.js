@@ -51,11 +51,14 @@ $(document).on("ready", function(){
         var genero = $('input:radio[name=sex]:checked').val() || "none";
         var estrato = $('input:radio[name=estrato]:checked').val() || "none";
         var edad = $('input:radio[name=edad]:checked').val() || "none";
+        var profesion = $('#profesion').find(":selected").text() || "none";
+        var light = $('input:radio[name=light]:checked').val() || "none";
+
         
         
         
         $.ajax({
-            url: '/findByGenero/'+genero +"/" +concept +"/"+ estrato +"/"+ edad,
+            url: '/findByGenero/'+genero +"/" +concept +"/"+ estrato +"/"+ edad + "/"+ profesion + "/"+ light,
             type: 'GET',
             async: true,
             //data: 'parametro1=valor1&parametro2=valor2',

@@ -58,12 +58,12 @@ body {
 
 #contenedor{
 	height: 720px;
-	width: 1320px;
+	width: 1420px;
 }
 
 #divIzq{
 	background: #c6c6c6;
-	height: 700px;
+	height: 1000px;
 	float: left;
 	padding-top: 20px;
 	width: 250px;
@@ -105,7 +105,7 @@ body {
 
 #divDer{
 	float: left;
-	height: 700px;
+	height: 1000px;
 	width: 1020px;
 }
 
@@ -118,7 +118,7 @@ body {
 #divDer #datos{
 	background: #ffffff;
 	border-radius: 7px;
-	height: 650px;
+	height: 950px;
 	float: left;
 	margin: 0 10px;
 	padding: 10px 20px 0 0;

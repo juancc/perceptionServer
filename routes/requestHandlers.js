@@ -30,21 +30,30 @@ db.open(function(err, db){//crea coleciones dependiendo de los archivos en /medi
                 db.createCollection(projects[i], function(err, collection){});    
             }
              
+         /*
+         //Calculo de colores e iluminacion del contexto
+         console.log("Calculating colors and lights...")
          db.collection("default", function(err, collection){
              var projecLighting = [];//calcula las luces del projecto
+             var projectColors = [];
              collection.find().toArray(function(err, items){
                  for(var i=0; i<items.length; i++){
                      projecLighting.push( ctx.lightProm(items[i].users.lighting) );
+                     projectColors.push(ctx.userContextColors(items[i].users.colors));
                      
                  }
                  projecLighting = ctx.projectLights(projecLighting);
+                 projectColors = ctx.projectContextColors(projectColors);
+                 console.log("Done");
+                 console.log(projectColors);
+                 
+                 
                  //console.log(projecLighting);
              });
-             
-             
-             
+                
              
          });
+         */
            
            
     });
@@ -100,7 +109,7 @@ function getModaGeneral(req, res){
 
 }
 
-function findByGenero(req, res){
+function findBy(req, res){
     var request = {};
     var genero = req.params.genero;
     var concept = req.params.concept;
@@ -108,8 +117,8 @@ function findByGenero(req, res){
     var edad = req.params.edad;
     var profesion = req.params.profesion;
     var light = req.params.light;
-    
-    ;
+    var colors = req.params.colors;
+
 
     if(estrato != "none"){
         request["users.estrato"] =  estrato.toString();
@@ -135,14 +144,27 @@ function findByGenero(req, res){
 
                 for(var i=0; i<items.length; i++){
                     
-                    if(light == "none"){
+                    if(light == "none" && colors == "none"){
                         resp.push(items[i].users.conceptsEvaluation[concept]);
                     }else{
-                        if( ctx.isLight(ctx.lightProm(items[i].users.lighting), light) ){
-                            resp.push(items[i].users.conceptsEvaluation[concept]);
+                        if(light != "none" && colors == "none"){
+                            if( ctx.isLight(ctx.lightProm(items[i].users.lighting), light) ){
+                                resp.push(items[i].users.conceptsEvaluation[concept]);
+                            }
+                        }else if(light == "none" && colors != "none"){
+                            if(ctx.isColor( ctx.userContextColors(items[i].users.colors), colors )){
+                                resp.push(items[i].users.conceptsEvaluation[concept]);
+                            }
+                        }else if(light != "none" && colors != "none"){
+                            if( ctx.isLight(ctx.lightProm(items[i].users.lighting), light) ){
+                                if(ctx.isColor( ctx.userContextColors(items[i].users.colors), colors )){
+                                    resp.push(items[i].users.conceptsEvaluation[concept]);
+                                }
+                            }
                         }
-                        
                     }
+                    
+                    
                 }
                 if(resp.length>0){
                     finalResp[0] = aux.calcMode(resp);
@@ -325,13 +347,13 @@ exports.findAllProject = findAllProject;
 
 exports.getAdjetivos = getAdjetivos;
 exports.getModaGeneral = getModaGeneral;
-exports.findByGenero = findByGenero;
+exports.findByGenero = findBy;
 
 exports.loadProject = loadProject;
 exports.uploadProject = uploadProject;
 
 exports.findAllPerception = findAllPerception;
-exports.findById = findById;
+//exports.findById = findById;
 exports.addPerception = addPerception;
 
 exports.updateWine = updateWine;

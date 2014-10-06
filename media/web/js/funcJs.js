@@ -53,12 +53,13 @@ $(document).on("ready", function(){
         var edad = $('input:radio[name=edad]:checked').val() || "none";
         var profesion = $('#profesion').find(":selected").text() || "none";
         var light = $('input:radio[name=light]:checked').val() || "none";
+        var colors = $('input:radio[name=colors]:checked').val() || "none";
 
         
         
         
         $.ajax({
-            url: '/findByGenero/'+genero +"/" +concept +"/"+ estrato +"/"+ edad + "/"+ profesion + "/"+ light,
+            url: '/findBy/'+genero +"/" +concept +"/"+ estrato +"/"+ edad + "/"+ profesion + "/"+ light +"/"+ colors,
             type: 'GET',
             async: true,
             //data: 'parametro1=valor1&parametro2=valor2',

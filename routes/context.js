@@ -150,7 +150,7 @@ function projectContextColors(usersColorList){//[["-123223", "234134"],["12332",
     
     var threshold = 60;
                                
-    while(projectContextColors.length>10){
+    while(projectContextColors.length>5){
     for(var i=0; i<projectContextColors.length; i++){
         var colorA = colorShift(projectContextColors[i][1]);
 
@@ -166,12 +166,31 @@ function projectContextColors(usersColorList){//[["-123223", "234134"],["12332",
     }
     threshold +=10;
     }
-
+    
+    for(var i=0; i<projectContextColors.length; i++){
+        projectContextColors[i] = colorShift(projectContextColors[i]); 
+    }
     //console.log(projectContextColors);
     return projectContextColors;
 };
 
 
+
+
+function isColor(colors, match){
+    var threshold = 50;
+    var IsColor = false;
+
+    for(var i=0; i<colors.length; i++){
+        var contextColor = colorShift(colors[i]);
+        if(colorDistance(contextColor, match) < threshold){
+            IsColor = true;
+            break;
+        }
+    }
+
+    return IsColor;
+};
 
 
 
@@ -210,3 +229,7 @@ function colorDistance(colorA, colorB){
 exports.lightProm = lightProm;
 exports.projectLights = projectLights;
 exports.isLight = isLight;
+
+exports.userContextColors = userContextColors;
+exports.projectContextColors = projectContextColors;
+exports.isColor = isColor;

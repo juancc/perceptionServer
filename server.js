@@ -22,7 +22,7 @@ app.get('/loadProject', handler.loadProject);
 app.post('/uploadProject', handler.uploadProject);
 
 
-app.get('/findByGenero/:genero/:concept/:estrato/:edad/:profesion/:light', handler.findByGenero);
+app.get('/findBy/:genero/:concept/:estrato/:edad/:profesion/:light/:colors', handler.findByGenero);
 
 
 app.post('/postPerception/:project', handler.addPerception);

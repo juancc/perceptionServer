@@ -6,8 +6,12 @@ ds.draw("svg", [["Lindo", "Feo"], ["Suave", "Rugoso"], ["Corto", "Largo"], ["Sil
 */
 
 var ds = {
-    draw: function(svgId, adjetivesList , evalList){
+    draw: function(svgId, adjetivesList , evalList1, evalList2){
         //solucion rapida borrar svg y volver a graficar las evaluaciones
+        
+        evalList1 = evalList1 || [];
+        evalList2 = evalList2 || [];
+        
         var svg = document.getElementById(svgId);
         $("#svgId").empty();
         
@@ -23,16 +27,25 @@ var ds = {
                 ds.circle(i*dW, j*dH, svg, "black");
                 
                 
-                if(evalList[j-1] == i-1){
+                if(evalList1[j-1] == i-1){
                     ds.circle(i*dW, j*dH, svg, "red");
+                };
+                
+                if(evalList2[j-1] == i-1){
+                    ds.circle(i*dW, j*dH, svg, "blue");
                 };
                 
                 
             }
         }
-        for (var i=1; i<evalList.length; i++){
-            ds.line((evalList[i-1]+1)*dW, i*dH, (evalList[i]+1)*dW, (i+1)*dH, "red", svg);
-        }
+        
+            for (var i=1; i<evalList1.length; i++){
+                ds.line((evalList1[i-1]+1)*dW, i*dH, (evalList1[i]+1)*dW, (i+1)*dH, "red", svg);
+                ds.line((evalList2[i-1]+1)*dW, i*dH, (evalList2[i]+1)*dW, (i+1)*dH, "blue", svg);
+            }
+        
+               
+                    
         
         
         

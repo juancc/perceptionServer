@@ -34,52 +34,86 @@ db.open(function(err, db){//crea coleciones dependiendo de los archivos en /medi
 }); 
 
 
-
-
-
-
-
-
-
-
 function findAllProject(req, res){
-        exec("ls media/projects", function(error, stdout, sterr){
-           console.log(stdout);
-           res.send(stdout);           
-        });
+	exec("ls media/projects", function(error, stdout, sterr){
+	   console.log(stdout);
+	   res.send(stdout);           
+	});
 }
 
+function getAdjetivos(req, res){
+    var proyect = req.params.proyect;
+	
+	db.collection(proyect, function(err, collection){
+		if(err){
+			console.log(err);
+		}else{
+			collection.find().toArray(function(err, item){
+				if(err){
+					console.log(err);
+				}else{
+					console.log(item);
+					res.send(item);
+				}
+			});
+		}
+    });
 
-function findAllPerception(req, res){
-    var project = req.params.project;
-    console.log('Retrieving perception from project: ' + project);
-    db.collection(project, function(err, collection){
-        collection.find().toArray(function(err, items){
-            res.send(items);
+}
+
+function getModaGeneral(req, res){
+    var proyect = req.params.proyect;
+	//var collect = req.params.collect;
+	
+	db.collection(proyect, function(err, collection){
+		if(err){
+			console.log(err);
+		}else{
+			collection.find( {'nombre': 'termos'}, {'limit': 1}).toArray(function(err, item){
+				if(err){
+					console.log(err);
+				}else{
+					console.log(item);
+					res.send(item);
+				}
+			});
+		}
+    });
+
+}
+
+function findByGenero(req, res){
+    var genero = req.params.genero;
+	//var collect = req.params.collect;
+	
+	db.termo.find({'users.genero': 'Masculino'})
+	db.collection('termo', function(err, collection){
+        collection.find( {'users.genero': ''+genero+''}, function(err, item){
+			res.send(item);
         });
     });
 
 }
 
+function findAllPerception(req, res){
+    //var project = req.params.project;
+    //console.log('Retrieving perception from project: ' + project);
+	db.collectionNames(function(err, collections){
+		console.log(collections);
+		res.send(collections);
+	});
 
-
-
-
+}
 
 function findById(req, res){
     var id = req.params.id;
     console.log('Retrieving wine: ' + id);
     db.collection('wines', function(err, collection){
         collection.findOne( {'_id': new BSON.ObjectID(id)}, function(err, item){
-        res.send(item);
+			res.send(item);
         });
     });
 }
-
-
-
-
-
 
 
 function addPerception(req, res){
@@ -223,11 +257,14 @@ function uploadProject(req, res) {
         }    
     });
 }
-    
-
 
 
 exports.findAllProject = findAllProject;
+
+exports.getAdjetivos = getAdjetivos;
+exports.getModaGeneral = getModaGeneral;
+exports.findByGenero = findByGenero;
+
 exports.loadProject = loadProject;
 exports.uploadProject = uploadProject;
 

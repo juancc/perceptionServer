@@ -1,0 +1,10 @@
+Consultas
+
+Por genero:
+
+	db.termo.find({'users.genero': 'Masculino'})
+	
+
+Filtrar edad en orden ascendente:
+
+		db.termo.find().sort( {"users.edad": 1} ).pretty()

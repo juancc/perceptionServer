@@ -57,16 +57,16 @@ body {
 }
 
 #contenedor{
-	height: 1000px;
-	width: 100%;
+	height: 720px;
+	width: 1320px;
 }
 
 #divIzq{
 	background: #c6c6c6;
-	height: 100%;
+	height: 700px;
 	float: left;
 	padding-top: 20px;
-	width: 300px;
+	width: 250px;
 }
 
 #divIzq h1{
@@ -74,7 +74,8 @@ body {
 	font-size: 16pt;
 	font-weight: bold;
 	margin: 0 auto;
-	width: 250px;
+	padding-bottom: 10px;
+	width: 220px;
 }
 
 #divIzq ul li{
@@ -104,8 +105,8 @@ body {
 
 #divDer{
 	float: left;
-	height: 100%;
-	width: 900px;
+	height: 700px;
+	width: 1020px;
 }
 
 #divDer h1{
@@ -114,9 +115,37 @@ body {
 	font-size: 16pt;
 }
 
-#divDer #graficos{
+#divDer #datos{
 	background: #ffffff;
-	height: 400px;
-	margin: 0 auto;
-	width: 400px;
+	border-radius: 7px;
+	height: 650px;
+	float: left;
+	margin: 0 10px;
+	padding: 10px 20px 0 0;
+	width: 480px;
+}
+
+#divDer .dato{
+	
+}
+
+#divDer #datos h2{
+	border-bottom: 1px solid;
+	font-weight: bold;
+	font-size: 13pt;
+	margin: 30px 20px;
+	text-align: left;
+}
+
+#divDer #datos input{
+}
+
+#divDer #adjetivos{
+	background: #ffffff;
+	border-radius: 7px;
+	height: 650px;
+	float: left;
+	margin: 0 10px;
+	padding: 10px 0 0 0;
+	width: 480px;
 }

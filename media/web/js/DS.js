@@ -13,7 +13,7 @@ var ds = {
         evalList2 = evalList2 || [];
         
         var svg = document.getElementById(svgId);
-        $("#svgId").empty();
+        $(svg).empty();
         
         //incrementos para dibujo de las bolitas
         var dW = svg.getAttribute("width").replace("px", '')/6;
@@ -28,11 +28,11 @@ var ds = {
                 
                 
                 if(evalList1[j-1] == i-1){
-                    ds.circle(i*dW, j*dH, svg, "red");
+                    ds.circle((i-1)*dW, j*dH, svg, "red");
                 };
                 
                 if(evalList2[j-1] == i-1){
-                    ds.circle(i*dW, j*dH, svg, "blue");
+                    ds.circle((i-1)*dW, j*dH, svg, "blue");
                 };
                 
                 
@@ -40,8 +40,8 @@ var ds = {
         }
         
             for (var i=1; i<evalList1.length; i++){
-                ds.line((evalList1[i-1]+1)*dW, i*dH, (evalList1[i]+1)*dW, (i+1)*dH, "red", svg);
-                ds.line((evalList2[i-1]+1)*dW, i*dH, (evalList2[i]+1)*dW, (i+1)*dH, "blue", svg);
+                ds.line((evalList1[i-1])*dW, i*dH, (evalList1[i])*dW, (i+1)*dH, "red", svg);
+                ds.line((evalList2[i-1])*dW, i*dH, (evalList2[i])*dW, (i+1)*dH, "blue", svg);
             }
         
                

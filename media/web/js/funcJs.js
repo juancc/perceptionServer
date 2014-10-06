@@ -21,7 +21,7 @@ $(document).on("ready", function(){
 	
 	$("#divIzq li").live("click",function(){
 		$("#divDer h1").html($(this).attr("id"));
-		$("#adjetivos").html("");
+		//$("#adjetivos").html("");
 		
 		$.ajax({
 		  url: '/getAdjetivos/'+$(this).attr("id"),
@@ -29,13 +29,7 @@ $(document).on("ready", function(){
 		  async: true,
 		  //data: 'parametro1=valor1&parametro2=valor2',
 		  success: function(resp){
-			respuestaInicial[0] = resp;
-			for(var i=0;i<resp[0].adjectives.length;i++){
-				for(var j=0;j<resp[0].adjectives[0].length;j++){
-					$("#adjetivos").append(resp[0].adjectives[i][j]);
-				}
-				$("#adjetivos").append("</br>");
-			}
+              adjetivos = resp;
 		  },
 		});
 		
@@ -53,21 +47,26 @@ $(document).on("ready", function(){
 	
 	
 	$(".cambio").on("change", function(){
-		
-		//var h = respuestaInicial[0][0].adjectives[0][0]; formato
-		
-		radio_button_value = $('input:radio[name=sex]:checked').val();
-		alert(radio_button_value);
-		$.ajax({
-		  url: '/genGraph/'+radio_button_value,
-		  type: 'GET',
-		  async: true,
-		  //data: 'parametro1=valor1&parametro2=valor2',
-		  success: function(resp){
-			for(var i=0;i<resp.length;i++){
-				var pos = resp[i];
-			}
-		  },
-		});
+        var concept = $('input:radio[name=concept]:checked').val();
+        var genero = $('input:radio[name=sex]:checked').val() || "none";
+        var estrato = $('input:radio[name=estrato]:checked').val() || "none";
+        var edad = $('input:radio[name=edad]:checked').val() || "none";
+        
+        
+        
+        $.ajax({
+            url: '/findByGenero/'+genero +"/" +concept +"/"+ estrato +"/"+ edad,
+            type: 'GET',
+            async: true,
+            //data: 'parametro1=valor1&parametro2=valor2',
+            success: function(resp){
+                ds.draw("svg", adjetivos, resp[0], resp[1]);
+            },
+        });
+        
+        
+        
+        
+
 	});
 });

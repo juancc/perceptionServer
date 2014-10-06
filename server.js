@@ -21,6 +21,10 @@ app.get('/listPerceptions/:project', handler.findAllPerception);// lista todas l
 app.get('/loadProject', handler.loadProject);
 app.post('/uploadProject', handler.uploadProject);
 
+
+app.get('/findByGenero/:genero/:concept/:estrato/:edad', handler.findByGenero);
+
+
 app.post('/postPerception/:project', handler.addPerception);
 //app.get('/getPerception/:project/:id', handler.findById);
 //app.put('/project/:id', projects.updateWine);

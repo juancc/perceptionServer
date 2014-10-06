@@ -1,6 +1,7 @@
 // Funciones que manejan los request-response del servidor
 var mongo = require('mongodb'),
-    fs = require('fs');
+    fs = require('fs'),
+    aux = require('./aux');
 var exec = require("child_process").exec
 
 
@@ -43,22 +44,15 @@ function findAllProject(req, res){
 
 function getAdjetivos(req, res){
     var proyect = req.params.proyect;
-	
-	db.collection(proyect, function(err, collection){
-		if(err){
-			console.log(err);
-		}else{
-			collection.find().toArray(function(err, item){
-				if(err){
-					console.log(err);
-				}else{
-					console.log(item);
-					res.send(item);
-				}
-			});
-		}
-    });
 
+    db.collection(proyect, function(err, collection){
+        collection.find().toArray(function(err, items){
+
+            console.log(items[10].adjectives);
+            res.send(items[10].adjectives);
+
+        });
+    });
 }
 
 function getModaGeneral(req, res){
@@ -83,16 +77,46 @@ function getModaGeneral(req, res){
 }
 
 function findByGenero(req, res){
+    var request = {};
     var genero = req.params.genero;
-	//var collect = req.params.collect;
+    var concept = req.params.concept;
+    var estrato = req.params.estrato;
+    var edad = req.params.edad;
+    
+    
+    if(estrato != "none"){
+        request["users.estrato"] =  estrato.toString();
+    }
+    if(genero != "none"){
+        request['users.genero'] = genero;
+    }
+    if(edad != "none"){
+        request['users.edad'] = edad.toString();
+    }
 	
-	db.termo.find({'users.genero': 'Masculino'})
-	db.collection('termo', function(err, collection){
-        collection.find( {'users.genero': ''+genero+''}, function(err, item){
-			res.send(item);
+    console.log(request);
+	//db.termo.find({'users.genero': 'Masculino'})
+    db.collection("default", function(err, collection){
+        
+        collection.find(request).toArray(function(err, items){
+            var resp = [];
+            var finalResp = [];
+            if(items.length>0){
+
+                for(var i=0; i<items.length; i++){
+
+                    resp.push(items[i].users.conceptsEvaluation[concept]);
+                }
+
+                finalResp[0] = aux.calcMode(resp);
+                finalResp[1] = aux.calcProm(resp);
+            }
+            
+            res.send(finalResp);
+
         });
     });
-
+    
 }
 
 function findAllPerception(req, res){

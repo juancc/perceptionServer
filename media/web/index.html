@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="style/style.css" type="text/css">
         <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/funcJs.js"></script>
+        <script type="text/javascript" src="js/DS.js"></script>
     </head>
     <body>
 		<div id = "contenedor">
@@ -22,24 +23,38 @@
 			<div id="divDer">
 				<h1>Nombre proyecto</h1>
 				<div id="datos">
+                    <div class="dato">
+                        <h2>Concepto</h2>
+                        <input class="cambio" type="radio" name="concept" value="camelbak">camelbak
+                        <input class="cambio" type="radio" name="concept" value="sura">sura
+                    </div>
 					<div class="dato">
 						<h2>Genero</h2>
-						<input class="cambio" type="radio" name="sex" value="male">Male
-						<input class="cambio" type="radio" name="sex" value="female">Female
+                        <input class="cambio" type="radio" name="sex" value="Masculino">Masculino
+                        <input class="cambio" type="radio" name="sex" value="Femenino">Femenino
 					</div>
 					<div class="dato">
 						<h2>Estrato</h2>
-						<input class="cambio" type="radio" name="sex" value="1">1
-						<input class="cambio" type="radio" name="sex" value="2">2
-						<input class="cambio" type="radio" name="sex" value="3">3
-						<input class="cambio" type="radio" name="sex" value="4">4
-						<input class="cambio" type="radio" name="sex" value="5">5
-						<input class="cambio" type="radio" name="sex" value="6">6
+						<input class="cambio" type="radio" name="estrato" value="1">1
+                        <input class="cambio" type="radio" name="estrato" value="2">2
+                        <input class="cambio" type="radio" name="estrato" value="3">3
+                        <input class="cambio" type="radio" name="estrato" value="4">4
+                        <input class="cambio" type="radio" name="estrato" value="5">5
+                        <input class="cambio" type="radio" name="estrato" value="6">6
 					</div>
 					<div class="dato edad">
 						<h2>Edad</h2>
-						<input type="radio" name="sex" value="male">Male
-						<input type="radio" name="sex" value="female">Female1	
+                        <input class="cambio" type="radio" name="edad" value="1987">87
+                        <input class="cambio" type="radio" name="edad" value="1988">88	
+                        <input class="cambio" type="radio" name="edad" value="1989">89	
+                        <input class="cambio" type="radio" name="edad" value="1990">90	
+                        <input class="cambio" type="radio" name="edad" value="1991">91	
+                        <input class="cambio" type="radio" name="edad" value="1992">92	
+                        <input class="cambio" type="radio" name="edad" value="1993">93	
+                        <input class="cambio" type="radio" name="edad" value="1994">94	
+                        <input class="cambio" type="radio" name="edad" value="1995">95	
+                        <input class="cambio" type="radio" name="edad" value="1996">96	
+                        <input class="cambio" type="radio" name="edad" value="1997">97	
 					</div>
 					<div class="dato">
 						<h2>Profesión</h2>
@@ -60,9 +75,13 @@
 					</div>
 				</div>
 				<div id="adjetivos">
-					
+                    <svg id="svg" width="300px" height="600px" style='background-color: white;'></svg>
 				</div>
 			</div>
 		</div>
+        
+        
+        
+        
 	</body>
 <html>
